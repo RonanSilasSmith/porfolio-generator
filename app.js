@@ -1,9 +1,14 @@
-const profileDataArgs = process.argv.slice(2, process.argv.length);
+const fs = require('fs');
+const generatePage = require('./src/page-template');
 
-const printProfileData = profileDataArr => 
-{
-console.log('===========');
-profileDataArr.forEach(profileItem => console.log(profileItem))
-}
+const profileDataArgs = process.argv.slice(2);
 
-printProfileData(profileDataArgs);
+const [name, github] = profileDataArgs;
+
+
+
+fs.writeFile('index.html', generatePage(name,github), err=>{
+    if(err) throw err;
+    
+    console.log('portfilio complere! check out index.html to see output')
+})
